@@ -12,7 +12,8 @@ def login(request):
 # www.newsportal.com/article/5/
 # www.newsportal.com/article/?article_id=5
 def article(request, id):
-    return render(request, "base.html")
+    article = Article.objects.get(id=id)
+    return render(request, "article.html", {"article": article})
 
 def search(request):
     return render(request, "base.html")
@@ -21,4 +22,5 @@ def bookmarks(request):
     return render(request, "base.html")
 
 def register(request):
-    return render(request, "base.html")
+    
+    return render(request, "register.html")

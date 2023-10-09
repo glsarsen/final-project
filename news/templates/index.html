@@ -8,8 +8,8 @@
         <div class="col d-flex align-items-start mb-5">
             <div>
                 <h3 class="fs-2 text-body-emphasis">{{ article.name }}</h3>
-                <p>{{ article.content }}</p>
-                <a href="#" class="btn btn-primary">View</a>
+                <p>{{ article.content|slice:':105' }}...</p>
+                <a href="{% url "article" article.id %}" class="btn btn-primary">View</a>
             </div>
         </div>
     {% endfor %}
