@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row g-5">
+    <div class="col-md-7 col-lg-8">
+        <div class="container">
+            <h4 class="mb-3">Login</h4>
+            <form class="needs-validation" action="" method="POST">
+                {% csrf_token %}
+
+                <div class="col-12">
+                    <label for="username" class="form-label">Username</label>
+                    <div class="input-group has-validation">
+                        <input type="text" class="form-control" id="username" name="user_name" placeholder="Username">
+                    </div>
+                </div>
+                
+                <div class="col-12">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password">
+                </div>
+
+                {% if authenticated is False %}
+                    <div>
+                        Authentication failed - check your username and password.
+                    </div>
+                {% endif %}
+                
+                <hr class="my-4">
+                
+                <button class="w-100 btn btn-primary btn-lg" type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

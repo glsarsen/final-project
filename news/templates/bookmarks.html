@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="bg-dark text-secondary px-4 py-5 text-center">
+        <div class="py-5">
+                
+                {% for bookmark in user.bookmarks.all %}
+                <a href="{% url "article" bookmark.article.id %}"><p>{{ bookmark.article.name }} - {{ bookmark.article.author }} - {{ bookmark.article.publication_date }}</p></a>
+                    <br>
+                    <hr>
+                {% endfor %}
+    
+            </div>
+        </div>
+    </div>
+{% endblock content %}

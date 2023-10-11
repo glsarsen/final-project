@@ -8,7 +8,7 @@
             <form class="needs-validation" action="" method="POST">
                 {% csrf_token %}
 
-                <div class="col-sm-6">
+                {% comment %} <div class="col-sm-6">
                     <label for="firstName" class="form-label">First name</label>
                     <input type="text" class="form-control" id="firstName" name="first_name">
                     <div class="invalid-feedback">
@@ -22,7 +22,7 @@
                     <div class="invalid-feedback">
                         Valid last name is required.
                     </div>
-                </div>
+                </div> {% endcomment %}
 
                 <div class="col-12">
                     <label for="username" class="form-label">Username</label>
@@ -40,6 +40,26 @@
                     <div class="invalid-feedback">
                         Please enter a valid email address for shipping updates.
                     </div>
+                </div>
+
+                <div class="col-12">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password">
+                    {% if invalid_password %}
+                        <div>
+                            Please enter a valid password.
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="col-12">
+                    <label for="password2" class="form-label">Repeat password</label>
+                    <input type="password" class="form-control" id="password2" name="password2">
+                    {% if invalid_password %}
+                        <div class="invalid-feedback">
+                            Please enter a valid password.
+                        </div>
+                    {% endif %}
                 </div>
                 
                 <hr class="my-4">

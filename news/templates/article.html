@@ -4,14 +4,42 @@
     <div class="bg-dark text-secondary px-4 py-5 text-center">
         <div class="py-5">
             <h1 class="display-5 fw-bold text-white">{{ article.name }}</h1>
+            <p> {{ article.author }} : {{ article.publication_date }}</p>
             <div class="col-lg-6 mx-auto">
                 <p class="fs-5 mb-4">{{ article.content }}</p>
+                <p> {{ article.tags }}</p>
 
-                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                <button type="button" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">Custom button</button>
-                <button type="button" class="btn btn-outline-light btn-lg px-4">Secondary</button>
-                </div>
+                {% if user.is_authenticated %}
+                    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                        <a href="{% url "comment" article.id %}"><button type="button" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">Leave comment</button></a>
+                    </div>
+                    {% if in_bookmarks %}
+                        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                            <a href="{% url "add_bookmark" article.id %}">
+                                <button type="button" class="btn btn-outline-danger btn-lg px-4 me-sm-3 fw-bold">
+                                Delete</button>
+                            </a>
+                        </div>
+                    {% else %}
+                    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                        <a href="{% url "add_bookmark" article.id %}">
+                            <button type="button" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">
+                            Save</button>
+                        </a>
+                    </div>
+                    {% endif %}
+                {% endif %}
                 
+                <br>
+                <hr>
+                
+                {% for comment in article.comments.all reversed %}
+                    <p>{{ comment.user }} - {{ comment.time }}</p>
+                    <p>{{ comment.content }}</p>
+                    <br>
+                    <hr>
+                {% endfor %}
+    
             </div>
         </div>
     </div>
