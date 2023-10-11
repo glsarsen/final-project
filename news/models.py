@@ -8,6 +8,7 @@ class Article(models.Model):
     publication_date = models.DateTimeField()
     tags = models.CharField(max_length=400)
     content = models.TextField()
+    # comments
 
     def __str__(self):
         return f"{self.name} - {self.author}"
@@ -23,7 +24,8 @@ class Comment(models.Model):
     content = models.TextField()
     article = models.ForeignKey("Article", related_name="comments", on_delete=models.CASCADE)
     user = models.ForeignKey(User, related_name="comments", on_delete=models.SET_NULL, null=True)
-    
+    time = models.DateTimeField(auto_now=True)
+
     def __str__(self):
         return f"{self.article} - {self.user}"
 
@@ -32,4 +34,4 @@ class Bookmark(models.Model):
     user = models.ForeignKey(User, related_name="bookmarks", on_delete=models.CASCADE, default=None)
 
     def __str__(self):
-        return f"{self.user}"
+        return f"{self.user} - {self.article}"
