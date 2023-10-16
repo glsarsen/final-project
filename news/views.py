@@ -25,9 +25,12 @@ def login_user(request):
 def article(request, id):
     article = Article.objects.get(id=id)
     in_bookmarks = False
-    for bookmark in request.user.bookmarks.all():
-        if article == bookmark.article:
-            in_bookmarks = True
+    try:
+        for bookmark in request.user.bookmarks.all():
+            if article == bookmark.article:
+                in_bookmarks = True
+    except AttributeError:
+        in_bookmarks = False
     return render(request, "article.html", {"article": article, "in_bookmarks": in_bookmarks})
 
 def comment(request, id):
