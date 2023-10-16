@@ -4,7 +4,26 @@ from .models import Article, User, Comment, Bookmark
 
 # Create your views here.
 def index(request):
-    articles = Article.objects.all()[:10]
+    sort_field = request.GET.get("sort")
+    search_field = request.GET.get("search")
+
+    if search_field and sort_field:
+        print("search and filter")
+        articles_by_name = Article.objects.filter(name__icontains=search_field)
+        articles_by_content = Article.objects.filter(content__icontains=search_field)
+        articles = articles_by_name.union(articles_by_content).order_by(sort_field)[:10]
+
+    if not search_field and sort_field:
+        articles = Article.objects.all().order_by(sort_field)[:10]
+
+    if search_field and not sort_field:
+        articles_by_name = Article.objects.filter(name__icontains=search_field)
+        articles_by_content = Article.objects.filter(content__icontains=search_field)
+        articles = articles_by_name.union(articles_by_content)[:10]
+
+    if not search_field and not sort_field:
+        articles = Article.objects.all()[:10]
+
     return render(request, "index.html", {"articles": articles})
 
 def login_user(request):

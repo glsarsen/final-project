@@ -4,6 +4,21 @@
 <div class="container px-4 py-5" id="hanging-icons">
     <h2 class="pb-2 border-bottom">Articles</h2>
 
+    
+    
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Filters
+        </button>
+        <ul id="sort-links" class="dropdown-menu dropdown-menu-dark">
+          <li><a class="dropdown-item active" href="?sort=publication_date">Date</a></li>
+          <li><a class="dropdown-item" href="?sort=author">Author</a></li>
+          <li><a class="dropdown-item" href="?sort=tags">Tags</a></li>
+          {% comment %} <li><hr class="dropdown-divider"></li> {% endcomment %}
+          <li><a class="dropdown-item" href="?sort=name">Name</a></li>
+        </ul>
+    </div>
+
     {% for article in articles %}
         <div class="col d-flex align-items-start mb-5">
             <div>
