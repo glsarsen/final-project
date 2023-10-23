@@ -8,8 +8,8 @@ class Article(models.Model):
     publication_date = models.DateTimeField()
     tags = models.CharField(max_length=400)
     content = models.TextField()
-    class Meta:
-        ordering = ["publication_date", "author", "tags"]
+    # class Meta:
+    #     ordering = ["publication_date", "author", "tags"]
 
     def __str__(self):
         return f"{self.name} - {self.author}"

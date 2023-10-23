@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +21,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-_6h5(uff-c$2@_h&lj%%5i1mqrp!3no*8u^(aaeu@97p3uwp-l'
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
@@ -76,15 +77,15 @@ WSGI_APPLICATION = 'newsportal.wsgi.application'
 
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
 
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'newsportal', 
-        'USER': 'root',
-        'PASSWORD': '9p2eI8CbZLtIONMcYhGq1ScQf8iKhpy7',
-        'HOST': 'dpg-ckeqbf6a3ovc738m0bug-a.frankfurt-postgres.render.com', 
-        'PORT': '5432',
+        # 'ENGINE': 'django.db.backends.postgresql',
+        # 'NAME': 'newsportal', 
+        # 'USER': 'root',
+        # 'PASSWORD': '9p2eI8CbZLtIONMcYhGq1ScQf8iKhpy7',
+        # 'HOST': 'dpg-ckeqbf6a3ovc738m0bug-a.frankfurt-postgres.render.com', 
+        # 'PORT': '5432',
     }
 }
 
@@ -126,6 +127,8 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [BASE_DIR / 'newsportal/static']
+
+STATIC_ROOT = "static/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
